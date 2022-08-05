@@ -1,7 +1,9 @@
 import { logoutHandler } from "features/auth"
+import { useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 
 export const SideBar = () => {
+    const dispatch = useDispatch()
     return (
         <section >
             <aside className="flex flex-col p-4 justify-between h-full">
@@ -46,7 +48,7 @@ export const SideBar = () => {
                 </div>
                 <i
                     className="fa-solid fa-right-from-bracket"
-                    onClick={logoutHandler}
+                    onClick={() => dispatch(logoutHandler())}
                 ></i>
             </div>
             </aside>
