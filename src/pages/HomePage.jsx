@@ -1,7 +1,9 @@
+import { NavBar } from "components"
+
 export const HomePage = () => {
     return (
         <div className="text-center">
-            HomePage
+            <NavBar />
         </div>
     )
 } 
