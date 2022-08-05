@@ -10,7 +10,7 @@ export const SideBar = () => {
             <ul>
                 <li>
                     <NavLink
-                    to="/home"
+                    to="/"
                     className={({ isActive }) => (isActive ? "inline-block w-full m-2 p-1 text-primary font-bold" : "inline-block w-full m-2 p-1")}
                     >
                     <i className="mr-2 fa-solid fa-house"></i> Home
