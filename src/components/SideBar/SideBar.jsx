@@ -1,17 +1,19 @@
 import { logoutHandler } from "features/auth"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 
 export const SideBar = () => {
     const dispatch = useDispatch()
+    const {user, token} = useSelector(state => state.auth)
+    // const {firstName} = user && JSON.parse(user);
     return (
         <section >
             <aside className="flex flex-col p-4 justify-between h-full">
-            <ul>
+            <ul className="w-max">
                 <li>
                     <NavLink
                     to="/"
-                    className={({ isActive }) => (isActive ? "inline-block w-full m-2 p-1 text-primary font-bold" : "inline-block w-full m-2 p-1")}
+                    className={({ isActive }) => (`${isActive ?  "text-primary font-bold" : null} inline-block w-full m-2 p-2 hover:bg-slate-300 rounded-full`)}
                     >
                     <i className="mr-2 fa-solid fa-house"></i> Home
                     </NavLink>
@@ -19,7 +21,7 @@ export const SideBar = () => {
                 <li>
                     <NavLink
                     to="/label"
-                    className={({ isActive }) => (isActive ? "inline-block w-full m-2 p-1 text-primary font-bold" : "inline-block w-full m-2 p-1")}
+                    className={({ isActive }) => (`${isActive ?  "text-primary font-bold" : null} inline-block w-full m-2 p-2 hover:bg-slate-300 rounded-full`)}
                     >
                     <i className="mr-2 fa-solid fa-tags"></i> Labels
                     </NavLink>
@@ -27,7 +29,7 @@ export const SideBar = () => {
                 <li>
                     <NavLink
                     to="/archive"
-                    className={({ isActive }) => (isActive ? "inline-block w-full m-2 p-1 text-primary font-bold" : "inline-block w-full m-2 p-1")}
+                    className={({ isActive }) => (`${isActive ?  "text-primary font-bold" : null} inline-block w-full m-2 p-2 hover:bg-slate-300 rounded-full`)}
                     >
                     <i className="mr-2 fa-solid fa-box-archive"></i> Archive
                     </NavLink>
@@ -35,7 +37,7 @@ export const SideBar = () => {
                 <li>
                     <NavLink
                     to="/trash"
-                    className={({ isActive }) => (isActive ? "inline-block w-full m-2 p-1 text-primary font-bold" : "inline-block w-full m-2 p-1")}
+                    className={({ isActive }) => (`${isActive ?  "text-primary font-bold" : null} inline-block w-full m-2 p-2 hover:bg-slate-300 rounded-full`)}
                     >
                     <i className="mr-2 fa-solid fa-trash-can"></i> Trash
                     </NavLink>
@@ -44,7 +46,7 @@ export const SideBar = () => {
 
             <div className="w-full font-semibold flex items-center justify-between m-2 p-1">
                 <div className="pl-2 text-xl">
-                    <i className="fa-solid fa-circle-user"></i> Admin
+                    <i className="fa-solid fa-circle-user"></i> { token ? user["firstName"] : "User"}
                 </div>
                 <i
                     className="fa-solid fa-right-from-bracket"

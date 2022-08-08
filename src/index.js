@@ -6,6 +6,7 @@ import { makeServer } from "./server";
 import {BrowserRouter as Router} from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "app/store";
+import { NotesProvider } from "contexts/notesContext";
 
 // Call make Server
 makeServer();
@@ -17,7 +18,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <App />
+        <NotesProvider>
+          <App />
+        </NotesProvider>
       </Router>
     </Provider>
   </React.StrictMode>
