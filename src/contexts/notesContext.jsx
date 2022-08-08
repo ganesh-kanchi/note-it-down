@@ -29,9 +29,8 @@ import {
       trash: [],
     });
     const [showInputModal, setShowInputModal] = useState(false);
-    const [tagsArray, setTagsArray] = useState([]);
+    const [labelsArray, setLabelsArray] = useState([]);
     const [beingEdited, setBeingEdited] = useState(false);
-    const [searchVal, setSearchVal] = useState("");
     const [notesOrder, setNotesOrder] = useState({ sort: "", filter: "" });
   
     const noteExists = noteState.notes?.find((note) => note._id === formInput._id);
@@ -150,15 +149,13 @@ import {
           noteExists,
           archiveExists,
           closeNoteModal,
-          tagsArray,
-          setTagsArray,
+          labelsArray,
+          setLabelsArray,
           beingEdited,
           setBeingEdited,
           updateNoteHandler,
           notesOrder,
-          setNotesOrder,
-          searchVal,
-          setSearchVal,
+          setNotesOrder
         }}
       >
         {children}
