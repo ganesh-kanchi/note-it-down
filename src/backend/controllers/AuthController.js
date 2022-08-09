@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
-import {requiresAuth } from "../utils/authUtils";
+import { requiresAuth } from "../utils/authUtils";
 import { formatDate } from "../utils/authUtils";
 const sign = require("jwt-encode");
 
