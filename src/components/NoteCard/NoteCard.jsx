@@ -4,7 +4,7 @@ import { useNotes } from "contexts/notesContext";
 import { PalleteModal, PriorityModal } from "components";
 
 export const NoteCard = ({ note }) => {
-  const { _id, noteTitle, content, tags, createdTime, bgColor, priority } = note;
+  const { _id, noteTitle, content, labels, createdTime, bgColor, priority } = note;
   const [showCardOptions, setShowCardOptions] = useState(false);
   const [showPalleteModal, setShowPalleteModal] = useState(false);
   const [showPriorityModal, setShowPriorityModal] = useState(false);
@@ -38,8 +38,8 @@ export const NoteCard = ({ note }) => {
             className="break-all pt-3 pl-3"
             dangerouslySetInnerHTML={{ __html: content }}
           ></div>
-          {tags.length > 0 ? (
-            <div className="w-max m-3 mb-0 pt-1 pr-1.5 pl-1.5 break-all bg-slate-300 rounded-2xl text-[0.7rem] uppercase">{tags[0]} </div>
+          {labels.length > 0 ? (
+            <div className="w-max m-3 mb-0 pt-1 pr-1.5 pl-1.5 break-all bg-slate-300 rounded-2xl text-[0.7rem] uppercase">{labels[0]} </div>
           ) : null}
         </div>
 

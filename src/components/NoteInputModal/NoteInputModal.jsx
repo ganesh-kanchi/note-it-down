@@ -40,8 +40,8 @@ export const NoteInputModal = () => {
             className="p-2 text-base w-full bg-inherit border-none focus:outline-none"
             type="text"
             placeholder="Add a label"
-            value={formInput.tags}
-            onChange={(e) => setFormInput({ ...formInput, tags: [e.target.value] })}
+            value={formInput.labels}
+            onChange={(e) => setFormInput({ ...formInput, labels: [e.target.value] })}
           />
         </div>
 
