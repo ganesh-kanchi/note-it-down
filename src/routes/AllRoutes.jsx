@@ -1,3 +1,4 @@
+import { NavBar, SideBar } from "components";
 import { Login } from "features/auth";
 import Mockman from "mockman-js";
 import { HomePage } from "pages";
@@ -9,13 +10,26 @@ const AllRoutes = () => {
   const {token} = useSelector(state=> state.auth)
   return (
     <div className="flex flex-col min-h-screen">
-      <Routes>
-        <Route path="/" element={ !token ? <Login /> : <Navigate to="home" replace />} />
-      
-        <Route path="home" element={<LockedRoute> <HomePage /> </LockedRoute>} />
+      {!token ? <div>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/mockman" element={<Mockman />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div> :
+      (
+        <div className="min-h-screen flex flex-col">
+            <NavBar />
 
-        <Route path="mockman" element={<Mockman />} />
-      </Routes>
+            <section className="flex-grow grid grid-cols-[12rem_1fr] text-black">
+                <SideBar />
+                <Routes>
+                  <Route path="/" element={<LockedRoute><HomePage /></LockedRoute>} />
+                </Routes>
+            </section>
+        </div>
+      )
+      }
     </div>
   );
 };
