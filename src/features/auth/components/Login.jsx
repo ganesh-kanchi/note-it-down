@@ -7,8 +7,8 @@ export const Login = () => {
     const dispatch = useDispatch();
     const {isLoading} = useSelector(state=> state.auth)
     const guestUser = {
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika123",
+        email: "ganeshkanchimad@gmail.com",
+        password: "ganeshkanchi123",
       };
     const [login, setLogin] = useState({ input: {}, error:"", showPassword: false})
 
@@ -51,8 +51,8 @@ export const Login = () => {
                             placeholder="Please enter your Password here"
                             />
                         {login.showPassword ?
-                            <i onClick={showPasswordToggle} class="fa-solid fa-eye-slash absolute right-4"></i> :
-                            <i onClick={showPasswordToggle} class="fa-solid fa-eye absolute right-4"></i>
+                            <i onClick={showPasswordToggle} className="fa-solid fa-eye-slash absolute right-4"></i> :
+                            <i onClick={showPasswordToggle} className="fa-solid fa-eye absolute right-4"></i>
                             }
                     </div>
                     <button className="bg-primary rounded-full p-1 hover:bg-dimPrimary mt-2" type="submit">

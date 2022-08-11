@@ -48,6 +48,9 @@ export const authSlice = createSlice({
         },
         [loginHandler.pending]: (state) => {
             state.isLoading = true;
+        },
+        [loginHandler.rejected]: (state, {payload}) => {
+            state.isLoading = payload;
         }
     }
 })

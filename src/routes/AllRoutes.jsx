@@ -1,7 +1,7 @@
 import { NavBar, SideBar } from "components";
 import { Login } from "features/auth";
 import Mockman from "mockman-js";
-import { HomePage } from "pages";
+import { HomePage, LabelsPage } from "pages";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate} from "react-router-dom";
 import { LockedRoute } from "./LockedRoute";
@@ -25,6 +25,7 @@ const AllRoutes = () => {
                 <SideBar />
                 <Routes>
                   <Route path="/" element={<LockedRoute><HomePage /></LockedRoute>} />
+                  <Route path="/labels" element={<LockedRoute><LabelsPage /></LockedRoute>} />
                 </Routes>
             </section>
         </div>

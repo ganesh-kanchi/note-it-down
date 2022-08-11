@@ -14,7 +14,7 @@ import {
   const initialFormInputs = {
     noteTitle: "",
     content: "<p><br></p>",
-    tags: [],
+    labels: [],
     bgColor: "#F5F5F5",
     priority: { Low: "1" },
   };
@@ -59,7 +59,7 @@ import {
               ...currentNote,
               noteTitle: currentNote.noteTitle.trim(),
               content: currentNote.content.trim(),
-              tags: currentNote.tags,
+              labels: currentNote.labels,
               bgColor: currentNote.bgColor,
               priority: currentNote.priority,
             },
@@ -87,7 +87,7 @@ import {
               ...noteExists,
               noteTitle: formInput.noteTitle.trim(),
               content: formInput.content.trim(),
-              tags: formInput.tags,
+              labels: formInput.labels,
               bgColor: formInput.bgColor,
               priority: formInput.priority,
             },
@@ -108,7 +108,7 @@ import {
           const { data, status } = await addNoteRequest(
             {
               ...formInput,
-              tags: formInput.tags,
+              labels: formInput.labels,
               bgColor: formInput.bgColor,
               priority: formInput.priority,
               createdTime: new Date().toLocaleString(),
