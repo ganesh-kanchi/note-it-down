@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ColorLensOutlinedIcon, ArchiveOutlinedIcon, DeleteOutlinedIcon, BarChartIcon } from "assets/index";
+import { ColorLensOutlinedIcon, ArchiveOutlinedIcon, DeleteOutlinedIcon, BarChartIcon, UnarchiveOutlinedIcon } from "assets/index";
 import { useNotes } from "contexts/notesContext";
 import { PalleteModal, PriorityModal } from "components";
 
@@ -9,12 +9,9 @@ export const NoteCard = ({ note }) => {
   const [showPalleteModal, setShowPalleteModal] = useState(false);
   const [showPriorityModal, setShowPriorityModal] = useState(false);
 
-  const {
-    setShowInputModal,
-    setFormInput,
-    setBeingEdited,
-  } = useNotes();
+  const { setShowInputModal, setFormInput, setBeingEdited,noteState: {archives} , archiveNote, unArchiveNote } = useNotes();
 
+  const inArchive = archives?.find((eachNote) => eachNote._id === note._id);
 
   const editNote = () => {
     setShowInputModal(true);
@@ -80,7 +77,14 @@ export const NoteCard = ({ note }) => {
               </i>
             </span>
             <i role="button" className="mt-0 mr-[0.35rem] p-1 rounded-[50%] text-slate-400 cursor-pointer">
-                <ArchiveOutlinedIcon />
+                {inArchive ? 
+                  (<UnarchiveOutlinedIcon onClick={(e)=> {
+                    unArchiveNote(e,note)
+                  }} />) : 
+                  (<ArchiveOutlinedIcon onClick={(e) => {
+                    archiveNote(e,note)}}
+                     />)
+                  }
             </i>
           <i role="button" className="mt-0 mr-[0.35rem] p-1 rounded-[50%] text-slate-400 cursor-pointer">
               <DeleteOutlinedIcon />

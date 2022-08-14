@@ -28,7 +28,7 @@ export const SideBar = () => {
                 </li>
                 <li>
                     <NavLink
-                    to="/archive"
+                    to="/archives"
                     className={({ isActive }) => (`${isActive ?  "text-primary font-bold" : null} inline-block w-full m-2 p-2 hover:bg-slate-300 rounded-full`)}
                     >
                     <i className="mr-2 fa-solid fa-box-archive"></i> Archive

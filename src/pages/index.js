@@ -1,2 +1,3 @@
-export {HomePage} from './HomePage'
-export {LabelsPage} from './LabelsPage'
+export {HomePage} from './HomePage';
+export {LabelsPage} from './LabelsPage';
+export {ArchivesPage} from './ArchivesPage';

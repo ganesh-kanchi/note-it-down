@@ -6,7 +6,7 @@ import {
     useReducer,
   } from "react";
   import { noteReducer } from "reducers/noteReducer";
-  import { getNotesRequest,addNoteRequest, editNoteRequest } from "requests";
+  import { getNotesRequest,addNoteRequest, editNoteRequest, editArchiveRequest, archiveNoteRequest, unArchiveNoteRequest, deleteArchiveRequest } from "requests";
   import { useSelector } from "react-redux";
   
   const NotesContext = createContext();
@@ -52,7 +52,34 @@ import {
   
     const updateNoteHandler = async (currentNote) => {
   
+      const archiveExists = noteState.archives?.find(
+        (note) => note._id === currentNote._id
+      );
       
+      if (archiveExists) {
+        try {
+          const { data, status } = await editArchiveRequest(
+            {
+              ...archiveExists,
+              title: currentNote.title.trim(),
+              content: currentNote.content.trim(),
+              tags: currentNote.tags,
+              bgColor: currentNote.bgColor,
+              priority: currentNote.priority,
+            },
+            token
+          );
+  
+          if (status === 201) {
+            dispatchNote({
+              type: 'SET_ARCHIVED',
+              payload: data.archives,
+            });
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
         try {
           const { data, status } = await editNoteRequest(
             {
@@ -75,6 +102,7 @@ import {
         } catch (err) {
           console.error(err);
         }
+      }
       
     };
   
@@ -98,6 +126,29 @@ import {
             dispatchNote({
               type: 'SET_NOTES',
               payload: data.notes,
+            });
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      } else if (archiveExists) {
+        try {
+          const { data, status } = await editArchiveRequest(
+            {
+              ...archiveExists,
+              title: formInput.title.trim(),
+              content: formInput.content.trim(),
+              tags: formInput.tags,
+              bgColor: formInput.bgColor,
+              priority: formInput.priority,
+            },
+            token
+          );
+  
+          if (status === 201) {
+            dispatchNote({
+              type: 'SET_ARCHIVED',
+              payload: data.archives,
             });
           }
         } catch (err) {
@@ -128,6 +179,57 @@ import {
       }
       closeNoteModal();
     };
+
+    const archiveNote = async (e, note) => {
+      e.stopPropagation();
+  
+      try {
+        const { data, status } = await archiveNoteRequest(note, token);
+  
+        if (status === 201) {
+          dispatchNote({
+            type: 'SET_NOTES_AND_ARCHIVE',
+            payload: { notes: data.notes, archives: data.archives },
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    const unArchiveNote = async (e, note) => {
+      e.stopPropagation();
+  
+      try {
+        const { data, status } = await unArchiveNoteRequest(note, token);
+  
+        if (status === 200) {
+          dispatchNote({
+            type: 'SET_NOTES_AND_ARCHIVE',
+            payload: { notes: data.notes, archives: data.archives },
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    const deleteArchivedNote = async (e, note) => {
+      e.stopPropagation();
+  
+      try {
+        const { data, status } = await deleteArchiveRequest(note, token);
+  
+        if (status === 200) {
+          dispatchNote({
+            type: 'SET_ARCHIVE_AND_TRASH',
+            payload: { archives: data.archives, trash: data.trash },
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
   
     const closeNoteModal = () => {
       setFormInput(initialFormInputs);
@@ -155,7 +257,10 @@ import {
           setBeingEdited,
           updateNoteHandler,
           notesOrder,
-          setNotesOrder
+          setNotesOrder,
+          archiveNote,
+          unArchiveNote,
+          deleteArchivedNote
         }}
       >
         {children}
